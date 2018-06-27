@@ -1,3 +1,10 @@
+import { toPhone } from "./phone.js";
+
+
+var phoneListElem = document.getElementById('phone-list'),
+    phoneDetailElem = document.getElementById('phone-detail');
+
+
 // Etapes:
 
 // 1) Calculer la hauteur du document 
@@ -16,10 +23,10 @@ var btt = document.getElementById("back-to-top"),
     docElem = document.documentElement,
     //la limite (100 par defaut)
     offset = 100,
-    scrollPos, docHeight;
+    scrollPos, docHeight,
 
-//il faut que l'on sache si l'on est sous firefox car la recuperation de la position courante du curseur différente sur firefox   
-isFirefox = navigator.userAgent.toLowerCase().lastIndexOf("firefox") > -1;
+    //il faut que l'on sache si l'on est sous firefox car la recuperation de la position courante du curseur différente sur firefox   
+    isFirefox = navigator.userAgent.toLowerCase().lastIndexOf("firefox") > -1;
 
 //1)Calcul de la hauteur du document
 docHeight = Math.max(body.scrollHeight, body.offsetHeight, docElem.clientHeight, docElem.scrollHeight, docElem.offsetHeight);
@@ -57,28 +64,28 @@ req.onreadystatechange = function () {
         /*construction de l'affichage*/
 
         //répartition équitable du nombre de téléphones
-        phonesPerCol = Math.round(phones.length / 4);
-
-        
-        start = 0;
-        stop = phonesPerCol;
-        colNumber = 1;
+        var phonesPerCol = Math.round(phones.length / 4),
+            start = 0,
+            stop = phonesPerCol,
+            colNumber = 1;
 
         for (let i = 0; i < phones.length; i += phonesPerCol) {
 
-            out = "";
+            var out = "";
             for (let j = start; j < stop; j++) {
                 const element = phones[j];
-                out += '<div class="img-overlay">' +
+
+                out += '<div class="img-overlay" id= "' + element.id + '" >' +
                     '<img src="' + element.imageUrl + '" alt="' + element.name + '">' +
                     '<div class="img-snippet">' +
                     '<div class="text"> ' + element.name + '</div>' +
-                    '<div class="info">i</div>' +
+                    '<div class="info" >i</div>' +
                     '</div>' + '</div>';
 
 
-            }            
-            document.getElementById('col'+colNumber).innerHTML = out;
+            }
+
+            document.getElementById('col' + colNumber).innerHTML = out;
             colNumber++;
 
             start = stop;
@@ -86,14 +93,109 @@ req.onreadystatechange = function () {
 
         }
 
-       
+
+        var images = document.getElementsByClassName('img-overlay');
+
+
+        for (let index = 0; index < images.length; index++) {
+            images[index].addEventListener("click", function (event) {
+                getDetails(event.currentTarget.id);
+
+            })
+
+        }
+
+
 
     }
 
 
 }
 
-req.open('GET', 'phones.json', true);
+req.open('GET', 'phones/phones.json', true);
 req.send();
+
+
+//=======Récuperation dynamique des détails d'un téléphone à partir d'une resource JSON ==============
+
+var slider = document.getElementById('slider'),
+    descriptions = document.querySelector('#description-details');
+
+
+
+function getDetails(phoneId) {
+
+    phoneListElem.style.opacity = 0;
+    phoneDetailElem.style.visibility = 'visible';
+    scrollToTop();
+
+
+    var req = new XMLHttpRequest(),
+        phoneDetails;
+
+    req.onreadystatechange = function () {
+        if (req.readyState == 4 && req.status == 200) {
+
+            //parsage du JSON et transformation en tableau
+            phoneDetails = toPhone(req.response);
+            // console.log(phoneDetails);
+
+            /*construction de l'affichage*/
+            var out = "",
+                imgOut = "";
+            //construction des images
+            var images = phoneDetails.images;
+            console.log(images);
+
+            for (let i = 0; i < images.length; i++) {
+
+                const image = images[i];
+
+
+
+                imgOut += " <li class='slide'>" +
+                    "<img src='" + image + "'>" + " </li>";
+
+
+            }
+            out += "<p><h4>Fonctionnalités :</h4>" + phoneDetails.additionalFeatures + "</p>"
+                + "<p><h4>Description :</h4>" + phoneDetails.description + "</p>"
+                + "<p><h4>Ecran :</h4>" + phoneDetails.screen + "</p>"
+                + "<p><h4>Disponibilités :</h4>" + phoneDetails.availability + "</p>"
+                + "<p><h4>Camera :</h4>" + phoneDetails.camera + "</p>";
+
+
+            slider.innerHTML = imgOut;
+            descriptions.innerHTML = out;
+
+
+
+        }
+
+
+    }
+
+    req.open('GET', 'phones/' + phoneId + '.json', true);
+    req.send();
+
+}
+
+//Defintion de la fonction de retour à la liste
+
+document.querySelector('#back-to-list').addEventListener('click', function () {
+    phoneListElem.style.opacity = 1;
+    phoneDetailElem.style.visibility = 'hidden';
+})
+
+
+//Defintion d'une fonction pour ramener le document en haut de page
+function scrollToTop() {
+    if (isFirefox)
+        docElem.scrollTop = 0;
+    else
+        body.scrollTop = 0;
+
+}
+
 
 
