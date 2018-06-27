@@ -40,3 +40,7 @@ window.addEventListener('scroll', function (event) {
 
 });
 
+
+//=======Récuperation dynamique des téléphones à partir d'une resource JSON ==============
+
+
