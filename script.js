@@ -42,6 +42,7 @@ window.addEventListener('scroll', function (event) {
 
 
 //=======Récuperation dynamique des téléphones à partir d'une resource JSON ==============
+
 //1) Création de l'objet XMLHttpRequest
 var req = new XMLHttpRequest(),
     phones = [],
@@ -58,34 +59,9 @@ req.onreadystatechange = function () {
 
         //répartition équitable du nombre de téléphones
         phonesPerCol = Math.round(phones.length / 4);
-
         
-        start = 0;
-        stop = phonesPerCol;
-        colNumber = 1;
-
-        for (let i = 0; i < phones.length; i += phonesPerCol) {
-
-            out = "";
-            for (let j = start; j < stop; j++) {
-                const element = phones[j];
-                out += '<div class="img-overlay">' +
-                    '<img src="' + element.imageUrl + '" alt="' + element.name + '">' +
-                    '<div class="img-snippet">' +
-                    '<div class="text"> ' + element.name + '</div>' +
-                    '<div class="info">i</div>' +
-                    '</div>' + '</div>';
-
-
-            }            
-            document.getElementById('col'+colNumber).innerHTML = out;
-            colNumber++;
-
-            start = stop;
-            stop = start + phonesPerCol;
-
-        }
-
+        //ici parcourir les colonnes et les remplir de résultats
+       
        
 
     }
@@ -93,7 +69,10 @@ req.onreadystatechange = function () {
 
 }
 
-req.open('GET', 'phones.json', true);
-req.send();
+//ouverture de la requête
+
+
+//envoi de la requête
+
 
 
