@@ -42,5 +42,58 @@ window.addEventListener('scroll', function (event) {
 
 
 //=======Récuperation dynamique des téléphones à partir d'une resource JSON ==============
+//1) Création de l'objet XMLHttpRequest
+var req = new XMLHttpRequest(),
+    phones = [],
+    rowElem = document.getElementsByClassName("row");
+
+//2) Définir l'action à effectuer lorsque l'on reçoit une réponse(req.readyState=4) et que tout est OK(req.status=200)
+
+req.onreadystatechange = function () {
+    if (req.readyState == 4 && req.status == 200) {
+        //parsage du JSON et transformation en tableau
+        phones = JSON.parse(req.response);
+
+        /*construction de l'affichage*/
+
+        //répartition équitable du nombre de téléphones
+        phonesPerCol = Math.round(phones.length / 4);
+
+        
+        start = 0;
+        stop = phonesPerCol;
+        colNumber = 1;
+
+        for (let i = 0; i < phones.length; i += phonesPerCol) {
+
+            out = "";
+            for (let j = start; j < stop; j++) {
+                const element = phones[j];
+                out += '<div class="img-overlay">' +
+                    '<img src="' + element.imageUrl + '" alt="' + element.name + '">' +
+                    '<div class="img-snippet">' +
+                    '<div class="text"> ' + element.name + '</div>' +
+                    '<div class="info">i</div>' +
+                    '</div>' + '</div>';
+
+
+            }            
+            document.getElementById('col'+colNumber).innerHTML = out;
+            colNumber++;
+
+            start = stop;
+            stop = start + phonesPerCol;
+
+        }
+
+       
+
+    }
+
+
+}
+
+req.open('GET', 'phones.json', true);
+req.send();
 
 
