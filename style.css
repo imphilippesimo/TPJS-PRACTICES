@@ -19,9 +19,9 @@ header {
 
 h1 {
     color:  #0F3057;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Nunito';
     font-size: 72px;
-    font-weight: 700;
+    font-weight: 800;
     line-height: 72px;
     letter-spacing: -1px;
     margin-bottom: 40px;
@@ -41,9 +41,9 @@ h1:after{
 
 h2 {
     color:  #0F3057;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 54px;
-    font-weight: 700;
+    font-weight: 400;
     line-height: 72px;
     letter-spacing: -1px;
     margin-bottom: 40px;
@@ -88,9 +88,9 @@ main{
 
   .details h2 {
     color:  #0F3057;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito', sans-serif;
     font-size: 34px;
-    font-weight: 500;
+    font-weight: 400;
     line-height: 50px;
     letter-spacing: -1px;  
     float: left;     
@@ -103,6 +103,7 @@ main{
         float: left;
         width: 100%;
         padding: 10px;
+        font-family: 'Nunito', sans-serif;
     }
 
   
@@ -161,7 +162,7 @@ main{
 
   .info {
     position: absolute;
-    font-family: 'Nunito Sans', sans-serif;
+    font-family: 'Nunito',sans-serif;
     color: #313943;
     cursor: pointer;
     bottom: 2.7em;
@@ -177,7 +178,7 @@ main{
 
   .text {
     position: absolute;
-    font-family: 'Nunito Sans', sans-serif;    
+    font-family: 'Nunito', sans-serif;    
     bottom: 3em;
     left: 1em;
       
@@ -201,14 +202,14 @@ main{
     padding: 1em;
     text-transform: uppercase;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 800;
     box-shadow: 0 0 2em 0 rgba(0,0,0,.25);
     transition: all .3s ease-in-out;
     display: inline-block;
     opacity: 0;
     text-decoration: none;
     font-size: .75em;
-    font-family: 'Nunito Sans', sans-serif;    
+    font-family: 'Nunito', sans-serif;    
 }
 
 #back-to-top:hover,#back-to-list:hover {
@@ -231,11 +232,11 @@ main{
     padding: 1em;
     text-transform: uppercase;
     cursor: pointer;
-    font-weight: 700;
+    font-weight: 800;
     box-shadow: 0 0 2em 0 rgba(0,0,0,.25);
     transition: all .3s ease-in-out;
     display: inline-block;
     text-decoration: none;
     font-size: .75em;
-    font-family: 'Nunito Sans', sans-serif;    
+    font-family: 'Nunito', sans-serif;    
 }
