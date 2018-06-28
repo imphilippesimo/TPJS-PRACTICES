@@ -94,16 +94,9 @@ req.onreadystatechange = function () {
         }
 
 
-        var images = document.getElementsByClassName('img-overlay');
-
-
-        for (let index = 0; index < images.length; index++) {
-            images[index].addEventListener("click", function (event) {
-                getDetails(event.currentTarget.id);
-
-            })
-
-        }
+        //pendant la construction des images, configurer l'écoute du clic sur l'overlay, lors du clic appeler getDetails(phoneId);
+        //comment récupérer l'id du phone afin de le passer à  getDetails??
+        
 
 
 
@@ -117,14 +110,16 @@ req.send();
 
 
 //=======Récuperation dynamique des détails d'un téléphone à partir d'une resource JSON ==============
-
+//va contenir les images
 var slider = document.getElementById('slider'),
+    //va contenir les détails
     descriptions = document.querySelector('#description-details');
 
 
 
 function getDetails(phoneId) {
 
+    //cacher l'élément de listing et afficher les details, faire un retour de page en haut.
     phoneListElem.style.opacity = 0;
     phoneDetailElem.style.visibility = 'visible';
     scrollToTop();
@@ -144,29 +139,19 @@ function getDetails(phoneId) {
             var out = "",
                 imgOut = "";
             //construction des images
+
+            //recuerer les images
             var images = phoneDetails.images;
-            console.log(images);
 
-            for (let i = 0; i < images.length; i++) {
+            //les parcourir et construire l'affichage à ajouter sous le slider
+            
 
-                const image = images[i];
-
-
-
-                imgOut += " <li class='slide'>" +
-                    "<img src='" + image + "'>" + " </li>";
+            //construire le contenu HTML à mettre sous l'élément descriptions
+            
 
 
-            }
-            out += "<p><h4>Fonctionnalités :</h4>" + phoneDetails.additionalFeatures + "</p>"
-                + "<p><h4>Description :</h4>" + phoneDetails.description + "</p>"
-                + "<p><h4>Ecran :</h4>" + phoneDetails.screen + "</p>"
-                + "<p><h4>Disponibilités :</h4>" + phoneDetails.availability + "</p>"
-                + "<p><h4>Camera :</h4>" + phoneDetails.camera + "</p>";
-
-
-            slider.innerHTML = imgOut;
-            descriptions.innerHTML = out;
+            //mettre les imges sous le slider
+            //mettre les details sous l'élément descriptions
 
 
 
@@ -175,16 +160,14 @@ function getDetails(phoneId) {
 
     }
 
-    req.open('GET', 'phones/' + phoneId + '.json', true);
-    req.send();
+    //ouvrir la requête et envoyer
 
 }
 
 //Defintion de la fonction de retour à la liste
 
 document.querySelector('#back-to-list').addEventListener('click', function () {
-    phoneListElem.style.opacity = 1;
-    phoneDetailElem.style.visibility = 'hidden';
+    //que faire ici?
 })
 
 
