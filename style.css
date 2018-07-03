@@ -17,6 +17,7 @@ header {
 
 }
 
+
 h1 {
     color:  #0F3057;
     font-family: 'Nunito';
@@ -61,10 +62,19 @@ footer p {
 
 }
 
-
 main{
     position: relative;
 }
+
+#search-box{
+    width: 100%;
+    font-family: 'Nunito', sans-serif;
+    margin-bottom: 30px;
+    padding:  .5em 1em .5em;    
+    
+}
+
+
 
 
 .row {    
