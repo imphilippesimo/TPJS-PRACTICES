@@ -13,5 +13,5 @@ Going through this sample will help you have a better understand the purpose of 
 <a href="https://docs.sencha.com/extjs/6.5.3">ExtJs</a> or <a href="https://reactjs.org/">React</a>
 
 An explanatory video tutorial on how to setup this example step by step from stratch is being made and will be soon available on 
-<a href="https://www.youtube.com/channel/UCtb8Kg9rN2ndBjJcFyLIOxA?disable_polymer=true">Youtube</a>.
+<a href="https://www.youtube.com/channel/UC3wRVdMon6U6XybYR9NP6dA">Youtube</a>.
 
